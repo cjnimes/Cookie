@@ -47,7 +47,7 @@ class Cookie
     }
     
     /**
-     * Verificar si existe una variable de sesión.
+     * Verificar si existe una variable de cookie.
      * @param string $key Nombre de la variable.
      * @return boolean
      */

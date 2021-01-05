@@ -4,10 +4,6 @@
  */
 class Cookie
 {    
-    // -------------------------------------------------------------------------
-    // Funciones generales
-    // -------------------------------------------------------------------------
-    
     /**
      * Obtener una variable de cookie.
      * @param string $key Nombre de la variable.
@@ -61,74 +57,5 @@ class Cookie
         print '<pre>';
         var_dump($_COOKIE);
         print '</pre>';
-    }
-    
-    // -------------------------------------------------------------------------
-    // Funciones de la cookie page_rows
-    // -------------------------------------------------------------------------    
-    
-    /**
-     * Obtener o cambiar el valor actual de una cookie page_rows.
-     * @param string $mod_id Id del módulo donde se hace el cambio
-     * @param int $new_value Nuevo valor
-     * @return int
-     */
-    public static function pageRows($mod_id, $new_value = 0)
-    {
-        $key = 'page_rows_' . $mod_id;
-        
-        if ($new_value > 0) {
-            
-            if (!self::pageRowsIsValid($new_value)) {
-                $new_value = self::pageRowsDefaultValue();
-            }
-            
-            $expiration =  time () + (60 * 60 * 24 * 365) * 10; // expiración dentro de 10 años
-            self::set($key, $new_value, $expiration, '', PW_Request::domain(false));
-            
-        }
-        
-        return self::get($key);
-    }
-    
-    /**
-     * Determinar si existe la cookie page_rows de un módulo determinado.
-     * @param string $mod_id Id del módulo
-     * @return bool
-     */
-    public static function hasPageRows($mod_id)
-    {        
-        $key = 'page_rows_' . $mod_id;
-        
-        return self::has($key);
-    }
-    
-    /**
-     * Valores que se consideran válidos para la cookie page_rows.
-     * @return array
-     */
-    public static function pageRowsValues()
-    {
-        return array(10, 20, 30, 40, 50);
-    }
-
-    /**
-     * Valor por defecto usado en la cookie page_rows. 
-     * @return int
-     */
-    public static function pageRowsDefaultValue()
-    {
-        return 20;
-    }
-    
-    /**
-     * Comprobar que $value esté dentro de los valores considerados válidos.
-     * @param int $value
-     * @return bool
-     */
-    public static function pageRowsIsValid($value)
-    {
-        $values = self::pageRowsValues();
-        return in_array($value, $values);
     }
 }
